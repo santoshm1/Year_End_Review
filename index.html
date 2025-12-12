@@ -23,6 +23,9 @@
 
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body>
@@ -102,57 +105,55 @@
                 {
                     title: "Technical Ownership of BW topics for all 4 templates Cbfc, OneERP, Nacos and F1 Light",
                     details: [
-                        "Led BW data warehouse architecture across 4 major templates",
-                        "Ensured data consistency and integrity across all systems",
-                        "Optimized query performance and data extraction processes"
+                        "Entire Technical ownership of developing Extractor which is key for our leadership team and business analysts for making decision as this has impact on every business process be it Sales, Procurement, inventory accounting or Stockmarket and many more.",
+                        "Responsible for keeping BW topics stable, this topic is not easy as it looks as we have so many bugs at BW architecture level and we’ll have to keep following with SAP for improvements.",
+                        "Developed the extractors in Nacos for MB heritage where the ask was from Ricarda, had to develop extractors on old legacy reports which had close to 12k lines of code and getting the extractor created out of the report was really a challenging task.",
+                        "Delivered ~50+ Extractors  in OneERP, Nacos, CbFC and F1 light."
                     ]
                 },
                 {
                     title: "Leasing",
                     details: [
-                        "Implemented leasing module functionality",
-                        "Developed custom reports for lease tracking",
-                        "Integrated leasing workflows with finance modules"
+                        "Leasing is a novel and substantial topic that presents significant challenges. While SAP provided an overview, they did not delve into the coding aspects. Consequently, any new developments necessitate thorough documentation review to ascertain the precise nature of the changes and implement necessary corrections.",
+                        "In the past, I have encountered instances where business processes were missing from the delivered objects."
                     ]
                 },
                 {
                     title: "Technical Owners for TR anytime tool",
                     details: [
-                        "Maintained and enhanced TR anytime tool",
-                        "Provided technical support and troubleshooting",
-                        "Implemented new features based on user feedback"
+                        "The next significant topic is the sundown of Nacos systems. As Nacos systems are becoming obsolete, we anticipate the emergence of new developments. This is a critical tool for Nacos colleagues, as everyone utilizes custom application TR anytime to move their TR to the production environment.",
+                        "As we are aware, Nacos has a complex landscape with approximately 18 production systems, as well as numerous quality and development systems. Additionally, there is a distinction between relevant and niche-relevant systems.",
+                        "Given the extensive historical code written, it presents a challenging task for developers to implement new changes.",
+                        "Recently, the P1M system was decommissioned. To address this, I have implemented a dynamic solution that allows for the decommissioning of any system in the future. This can be achieved by maintaining the systems and users at the table level."
                     ]
                 },
                 {
                     title: "Monthly Security Note implementation in Nacos",
                     details: [
-                        "Applied monthly SAP security patches",
-                        "Tested security updates in development environment",
-                        "Documented and tracked all security implementations"
+                        "Despite the absence of recent developments in Nacos, security notes remain crucial. Consequently, I consistently implement security notes in four systems each month."
                     ]
                 },
                 {
                     title: "Developed code for Code Repo",
                     details: [
-                        "Created reusable code components and utilities",
-                        "Maintained code repository with proper documentation",
-                        "Implemented version control best practices"
+                        "In the rapidly evolving field of technology, artificial intelligence (AI) and knowledge bases have emerged as pivotal components for any large language model (LLM).",
+                        "As demonstrated by yourself and Kamesh, the functionality of an LLM can be showcased by enabling multiple models to interact and collaboratively generate results.",
+                        "Without a comprehensive code repository report, it is challenging to anticipate the desired outcomes from an LLM.",
+                        "The implementation process was undoubtedly complex, necessitating collaboration with the Solman team to obtain the RFC FM. This provided access to the Solman Number (TR) and user stories associated with it, which subsequently linked our SAP code to Jira and Confluence.",
+                        "Meta data serves as the foundation for LLM operations, serving as input data that enables the model to derive information from various other LLMs."
                     ]
                 },
                 {
                     title: "GRC chatbot Implementation",
                     details: [
-                        "Developed AI-powered chatbot for GRC queries",
-                        "Integrated chatbot with existing GRC systems",
-                        "Trained chatbot with domain-specific knowledge"
+                        "As a primary SAP developer, our primary focus is on SAP-related tasks. However, contributing at the organizational level has proven to be challenging. Recently, I have made significant contributions to the GRC chatbot application, which is entirely developed in Python.",
+                        "This project was also presented to Ananth and Ricarda, and they have expressed great enthusiasm for it."
                     ]
                 },
                 {
                     title: "Backup for Dame and Inventory Accounting topics",
                     details: [
-                        "Provided backup support for Dame module",
-                        "Handled inventory accounting processes",
-                        "Resolved critical issues in absence of primary owner"
+                        "Having Business Value (BW) topics in four templates, extensive topic leasing, complex TR anytime tool, numerous note implementations, a code repository, and a GRC chatbot. Additionally, I serve as a backup for Inventory accounting and DAME topics. Most of the topics originating from Germany have been brought to our team under Shankar’s guidance, and to date, we have not encountered any escalation issues. This does not imply that we do not face any challenges. Shankar and I are committed to going the extra mile in all topics and are successfully maintaining stability. With three years of experience handling these numerous topics, I am proud of my accomplishments."
                     ]
                 }
             ];
@@ -234,11 +235,24 @@
 
         const Tile = ({ data }) => {
             const [isOpened, setIsOpened] = React.useState(false);
+            const tileRef = React.useRef(null);
+
+            const handleClick = (e) => {
+                if (!isOpened && window.spawnConfetti) {
+                    // Get click coordinates relative to viewport
+                    const rect = tileRef.current.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2;
+                    const y = rect.top + rect.height / 2;
+                    window.spawnConfetti(x, y);
+                }
+                setIsOpened(!isOpened);
+            };
 
             return (
                 <div
+                    ref={tileRef}
                     className={`letter-container ${isOpened ? 'letter-opened' : ''}`}
-                    onClick={() => setIsOpened(!isOpened)}
+                    onClick={handleClick}
                 >
                     <div className="envelope">
                         <div className="envelope-flap"></div>
@@ -336,6 +350,205 @@
                 </div>
             );
         };
+
+
+        // Three.js Particle System
+        const initThreeJSParticles = () => {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.domElement.style.position = 'fixed';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.pointerEvents = 'none'; // Click through
+            renderer.domElement.style.zIndex = '9999';
+            document.body.appendChild(renderer.domElement);
+
+            camera.position.z = 50;
+
+            // Particle variables
+            let particles = [];
+            const particleCount = 100;
+            const geometry = new THREE.BufferGeometry();
+            const textureLoader = new THREE.TextureLoader();
+            // Create a simple circle texture programmatically
+            const canvas = document.createElement('canvas');
+            canvas.width = 32;
+            canvas.height = 32;
+            const context = canvas.getContext('2d');
+            context.beginPath();
+            context.arc(16, 16, 16, 0, 2 * Math.PI);
+            context.fillStyle = 'white';
+            context.fill();
+            const particleTexture = new THREE.CanvasTexture(canvas);
+
+            const material = new THREE.PointsMaterial({
+                color: 0xffd700, // Gold
+                size: 2,
+                map: particleTexture,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            function spawnConfetti(x, y) {
+                // Convert screen coords to Three.js world coords
+                const vec = new THREE.Vector3();
+                const pos = new THREE.Vector3();
+                vec.set(
+                    (x / window.innerWidth) * 2 - 1,
+                    -(y / window.innerHeight) * 2 + 1,
+                    0.5
+                );
+                vec.unproject(camera);
+                vec.sub(camera.position).normalize();
+                const distance = -camera.position.z / vec.z;
+                pos.copy(camera.position).add(vec.multiplyScalar(distance));
+
+                // Create explosion burst
+                for (let i = 0; i < 60; i++) {
+                    const particle = {
+                        position: pos.clone(),
+                        velocity: new THREE.Vector3(
+                            (Math.random() - 0.5) * 20,
+                            (Math.random() - 0.5) * 20 + 10, // Upward bias
+                            (Math.random() - 0.5) * 10
+                        ),
+                        alpha: 1.0,
+                        color: new THREE.Color().setHSL(Math.random(), 1.0, 0.5)
+                    };
+                    particles.push(particle);
+                }
+            }
+
+            // Expose to window
+            window.spawnConfetti = spawnConfetti;
+
+            // Animation Loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+
+                // Update particles
+                if (particles.length > 0) {
+                    // Rebuild geometry
+                    const positions = [];
+                    const colors = [];
+                    const sizes = [];
+
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                        const p = particles[i];
+                        p.position.add(p.velocity.multiplyScalar(0.1));
+                        p.velocity.y -= 0.5; // Gravity
+                        p.alpha -= 0.01;
+
+                        if (p.alpha <= 0) {
+                            particles.splice(i, 1);
+                        } else {
+                            positions.push(p.position.x, p.position.y, p.position.z);
+                            colors.push(p.color.r, p.color.g, p.color.b);
+                            sizes.push(p.alpha * 3); // Scale down
+                        }
+                    }
+
+                    if (positions.length > 0) {
+                        const geo = new THREE.BufferGeometry();
+                        geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                        geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+                        // We would need a shader material for per-particle sizing/opacity easily which is complex here.
+                        // For simplicity in this demo, we'll re-use a simple Points object or Sprites.
+                        // Actually, creating a Points object per frame is bad. 
+                        // Let's use Sprite approach for simplicity in a quick script.
+                        // Or just clear scene and add valid sprites? No, let's use a group.
+                    }
+                }
+
+                // SIMPLIFIED APPROACH: Use Mesh objects for each particle for easiest lifecycle
+                // Clean up scene of old particles
+                scene.children.forEach(child => {
+                    if (child.userData.isParticle) {
+                        child.position.add(child.userData.velocity);
+                        child.userData.velocity.y -= 0.02; // Gravity
+                        child.material.opacity -= 0.015;
+                        child.rotation.z += 0.1;
+                        child.rotation.x += 0.1;
+
+                        if (child.material.opacity <= 0) {
+                            scene.remove(child);
+                            child.geometry.dispose();
+                            child.material.dispose();
+                        }
+                    }
+                });
+
+                renderer.render(scene, camera);
+            };
+
+            // Redefine spawn for Mesh approach
+            window.spawnConfetti = (x, y) => {
+                const vec = new THREE.Vector3();
+                const pos = new THREE.Vector3();
+                vec.set(
+                    (x / window.innerWidth) * 2 - 1,
+                    -(y / window.innerHeight) * 2 + 1,
+                    0.5
+                );
+                vec.unproject(camera);
+                vec.sub(camera.position).normalize();
+                const distance = -camera.position.z / vec.z; // z=0 plane
+                pos.copy(camera.position).add(vec.multiplyScalar(distance));
+
+                const colors = [0xffd700, 0xff0000, 0xffffff, 0xC0C0C0];
+                const geometries = [
+                    new THREE.PlaneGeometry(0.8, 0.8),
+                    new THREE.CircleGeometry(0.4, 8)
+                ];
+
+                for (let i = 0; i < 40; i++) {
+                    const material = new THREE.MeshBasicMaterial({
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        side: THREE.DoubleSide,
+                        transparent: true,
+                        opacity: 1
+                    });
+                    const geo = geometries[Math.floor(Math.random() * geometries.length)];
+                    const mesh = new THREE.Mesh(geo, material);
+
+                    mesh.position.copy(pos);
+                    // Spread
+                    mesh.position.x += (Math.random() - 0.5) * 5;
+                    mesh.position.y += (Math.random() - 0.5) * 5;
+
+                    mesh.userData = {
+                        isParticle: true,
+                        velocity: new THREE.Vector3(
+                            (Math.random() - 0.5) * 0.8,
+                            (Math.random()) * 0.8 + 0.2,
+                            (Math.random() - 0.5) * 0.8
+                        )
+                    };
+
+                    // Random rotation init
+                    mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+
+                    scene.add(mesh);
+                }
+            };
+
+            animate();
+
+            // Resize handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
+
+        // Initialize
+        initThreeJSParticles();
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);

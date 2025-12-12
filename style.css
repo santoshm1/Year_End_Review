@@ -427,6 +427,7 @@ header {
     line-height: 1.6;
     opacity: 0;
     animation: detailItemReveal 0.4s ease-out forwards;
+    text-align: left;
 }
 
 .topic-detail-item:nth-child(1) {
