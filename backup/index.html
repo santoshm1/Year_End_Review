@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year End Review - Santosh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="glass-container">
+        <header>
+            <h1>Year End Review <span class="highlight">Santosh</span></h1>
+            <p class="subtitle">2025 Performance & Impact</p>
+        </header>
+
+        <section class="hierarchy-section">
+            <h2>Team Structure</h2>
+            <div class="hierarchy-tree">
+                <div class="node-wrapper">
+                    <div class="glass-card manager">
+                        <div class="role">Manager</div>
+                        <div class="name">Kanchan</div>
+                    </div>
+                    <div class="connector"></div>
+                </div>
+
+                <div class="node-wrapper">
+                    <div class="glass-card lead">
+                        <div class="role">Team Lead</div>
+                        <div class="name">Shankar</div>
+                    </div>
+                    <div class="connector"></div>
+                </div>
+
+                <div class="node-wrapper">
+                    <div class="glass-card me">
+                        <div class="role">Software Engineer</div>
+                        <div class="name">Santosh</div>
+                        <div class="badge">Me</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements-section">
+            <h2>Key Achievements</h2>
+            <div class="achievements-grid">
+                <div class="glass-card achievement-card">
+                    <div class="icon">🚀</div>
+                    <h3>Project Delivery</h3>
+                    <p>Successfully delivered the core payment module ahead of schedule, improving transaction speed by
+                        30%.</p>
+                </div>
+                <div class="glass-card achievement-card">
+                    <div class="icon">🛠️</div>
+                    <h3>System Optimization</h3>
+                    <p>Refactored legacy codebases reducing technical debt and improving maintainability scores.</p>
+                </div>
+                <div class="glass-card achievement-card">
+                    <div class="icon">🤝</div>
+                    <h3>Mentorship</h3>
+                    <p>Onboarded 2 new junior developers and conducted weekly knowledge sharing sessions.</p>
+                </div>
+                <div class="glass-card achievement-card">
+                    <div class="icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Proposed and prototyped a new internal tool that automated weekly reporting, saving 5 hours/week.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple interaction to add parallax effect to blobs
+        document.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.blob');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 20;
+                const xOffset = (window.innerWidth / 2 - e.clientX) / speed;
+                const yOffset = (window.innerHeight / 2 - e.clientY) / speed;
+                blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+    </script>
+</body>
+
+</html>

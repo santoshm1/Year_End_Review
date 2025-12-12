@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year End Review - Santosh Maskale</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Netflix uses Netflix Sans (proprietary), fallback to similar fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- Netflix-style Intro Animation -->
+    <div id="intro-animation" class="intro-container">
+        <div class="intro-content">
+            <div class="intro-name">Santosh</div>
+            <div class="intro-logo">
+                <img src="logo.png" alt="Mercedes-Benz" class="intro-logo-img" />
+            </div>
+            <div class="intro-text">
+                <span class="intro-title">Year End Review</span>
+                <span class="intro-year">2025</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const tilesData = [
+            {
+                title: "Compliance and Integrity",
+                icon: "🛡️",
+                points: [
+                    "Completed all mandatory compliance trainings ahead of schedule.",
+                    "Maintained 100% adherence to coding standards and security protocols.",
+                    "Proactively identified and resolved potential data privacy risks."
+                ]
+            },
+            {
+                title: "Contributions to business requirement",
+                icon: "💼",
+                points: [
+                    "Delivered key ABAP reports optimizing financial reporting time by 40%.",
+                    "Implemented critical enhancements for the OneERP migration project.",
+                    "Resolved high-priority production incidents within SLA."
+                ]
+            },
+            {
+                title: "Contributions to organization wide initiatives",
+                icon: "🌍",
+                points: [
+                    "Actively participated in the 'Clean Code' initiative.",
+                    "Mentored 2 junior developers on ABAP best practices.",
+                    "Contributed documentation to the internal knowledge base."
+                ]
+            },
+            {
+                title: "Learnings in 2025",
+                icon: "📚",
+                points: [
+                    "Mastered advanced SAP HANA optimization techniques.",
+                    "Gained proficiency in SAP Fiori and UI5 development.",
+                    "Completed certification in Agile methodologies."
+                ]
+            },
+            {
+                title: "Focus areas in 2026",
+                icon: "🎯",
+                points: [
+                    "Deepen expertise in SAP S/4HANA Cloud extensions.",
+                    "Explore AI integration within SAP workflows.",
+                    "Take on leadership roles in technical architecture reviews."
+                ]
+            }
+        ];
+
+
+        const Header = () => {
+            const [showTopics, setShowTopics] = React.useState(false);
+            const [expandedTopics, setExpandedTopics] = React.useState({});
+
+            const coreTopics = [
+                {
+                    title: "Technical Ownership of BW topics for all 4 templates Cbfc, OneERP, Nacos and F1 Light",
+                    details: [
+                        "Led BW data warehouse architecture across 4 major templates",
+                        "Ensured data consistency and integrity across all systems",
+                        "Optimized query performance and data extraction processes"
+                    ]
+                },
+                {
+                    title: "Leasing",
+                    details: [
+                        "Implemented leasing module functionality",
+                        "Developed custom reports for lease tracking",
+                        "Integrated leasing workflows with finance modules"
+                    ]
+                },
+                {
+                    title: "Technical Owners for TR anytime tool",
+                    details: [
+                        "Maintained and enhanced TR anytime tool",
+                        "Provided technical support and troubleshooting",
+                        "Implemented new features based on user feedback"
+                    ]
+                },
+                {
+                    title: "Monthly Security Note implementation in Nacos",
+                    details: [
+                        "Applied monthly SAP security patches",
+                        "Tested security updates in development environment",
+                        "Documented and tracked all security implementations"
+                    ]
+                },
+                {
+                    title: "Developed code for Code Repo",
+                    details: [
+                        "Created reusable code components and utilities",
+                        "Maintained code repository with proper documentation",
+                        "Implemented version control best practices"
+                    ]
+                },
+                {
+                    title: "GRC chatbot Implementation",
+                    details: [
+                        "Developed AI-powered chatbot for GRC queries",
+                        "Integrated chatbot with existing GRC systems",
+                        "Trained chatbot with domain-specific knowledge"
+                    ]
+                },
+                {
+                    title: "Backup for Dame and Inventory Accounting topics",
+                    details: [
+                        "Provided backup support for Dame module",
+                        "Handled inventory accounting processes",
+                        "Resolved critical issues in absence of primary owner"
+                    ]
+                }
+            ];
+
+            const toggleTopic = (index) => {
+                setExpandedTopics(prev => ({
+                    ...prev,
+                    [index]: !prev[index]
+                }));
+            };
+
+            return (
+                <header>
+                    <div className="header-top">
+                        <div className="brand-section">
+                            <div className="mb-logo">
+                                <img src="logo.png" alt="Mercedes-Benz Logo" className="mb-logo-img" />
+                            </div>
+                            <div className="brand-text">
+                                <span className="brand-main">Mercedes-Benz</span>
+                                <span className="brand-sub">Research & Development</span>
+                            </div>
+                        </div>
+
+                        <div className="center-title">
+                            <div className="year-review-modern">
+                                <span className="yr-text">Year End Review</span>
+                                <span className="yr-year">2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="header-separator"></div>
+
+                    <div className="profile-section">
+                        <h1 className="name">Santosh Maskale</h1>
+                        <h2 className="role">ABAP Developer OneERP</h2>
+
+                        <div className="core-topics-section">
+                            <button
+                                className="topics-reveal-btn"
+                                onClick={() => setShowTopics(!showTopics)}
+                            >
+                                {showTopics ? '▼' : '▶'} Core Topics 2025
+                            </button>
+
+                            {showTopics && (
+                                <ul className="topics-list">
+                                    {coreTopics.map((topic, index) => (
+                                        <li
+                                            key={index}
+                                            className={`topic-item ${expandedTopics[index] ? 'topic-expanded' : ''}`}
+                                            style={{ animationDelay: `${index * 0.15}s` }}
+                                            onClick={() => toggleTopic(index)}
+                                        >
+                                            <div className="topic-header">
+                                                <span className="topic-number">{index + 1}.</span>
+                                                <span className="topic-title">{topic.title}</span>
+                                                <span className="topic-arrow">{expandedTopics[index] ? '▲' : '▼'}</span>
+                                            </div>
+                                            {expandedTopics[index] && (
+                                                <ul className="topic-details">
+                                                    {topic.details.map((detail, detailIndex) => (
+                                                        <li key={detailIndex} className="topic-detail-item">
+                                                            {detail}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const Tile = ({ data }) => {
+            const [isOpened, setIsOpened] = React.useState(false);
+
+            return (
+                <div
+                    className={`letter-container ${isOpened ? 'letter-opened' : ''}`}
+                    onClick={() => setIsOpened(!isOpened)}
+                >
+                    <div className="envelope">
+                        <div className="envelope-flap"></div>
+                        <div className="wax-seal">
+                            <span className="seal-icon">{data.icon}</span>
+                        </div>
+                        <div className="envelope-title">{data.title}</div>
+                    </div>
+
+                    <div className="letter-paper">
+                        <div className="letter-header">
+                            <div className="ornament-left">❦</div>
+                            <h3 className="letter-title">{data.title}</h3>
+                            <div className="ornament-right">❦</div>
+                        </div>
+
+                        <div className="letter-content">
+                            <ul className="letter-points">
+                                {data.points.map((point, index) => (
+                                    <li key={index}>{point}</li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="letter-signature">
+                            {/* <span className="signature-line">Santosh Maskale</span> */}
+                            {/* <span className="signature-date">Anno Domini 2025</span> */}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="footer-container">
+                    <div className="footer-content">
+                        <div className="footer-credits">
+                            <span>Created by </span>
+                            <span className="footer-name">Santosh</span>
+                        </div>
+
+                        <div className="footer-logo-section">
+                            <img src="made_in_india.png" alt="Made in India" className="footer-logo" />
+                        </div>
+
+                        <div className="ai-badge">
+                            <span>Created entirely using AI</span>
+                            <span className="ai-icon">🤖</span>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const App = () => {
+            const [showIntro, setShowIntro] = useState(true);
+
+            useEffect(() => {
+                // Hide intro after 4 seconds
+                const timer = setTimeout(() => {
+                    const introElement = document.getElementById('intro-animation');
+                    if (introElement) {
+                        introElement.classList.add('intro-fade-out');
+                        setTimeout(() => {
+                            setShowIntro(false);
+                        }, 800); // Wait for fade-out animation
+                    }
+                }, 4000);
+
+                return () => clearTimeout(timer);
+            }, []);
+
+            return (
+                <div className={`app-container ${!showIntro ? 'app-visible' : ''}`}>
+                    <Header />
+                    <div className="content-section">
+                        <h2 className="row-title">5 Core Pillars</h2>
+
+                        {/* First row - 3 tiles */}
+                        <div className="tiles-row">
+                            {tilesData.slice(0, 3).map((tile, index) => (
+                                <Tile key={index} data={tile} />
+                            ))}
+                        </div>
+
+                        {/* Second row - 2 tiles */}
+                        <div className="tiles-row">
+                            {tilesData.slice(3, 5).map((tile, index) => (
+                                <Tile key={index + 3} data={tile} />
+                            ))}
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
